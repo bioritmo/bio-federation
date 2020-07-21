@@ -25,7 +25,7 @@ custom:
     dynamoDb:
       endpoint: http://localhost:${env:DYNAMODB_PORT, "4566"}
   appSync:
-    name: bio-federation-grapqhl
+    name: bio-federation-grapqhl-${self:provider.stage}
     authenticationType: API_KEY
     mappingTemplates:
       - dataSource: awsHttpDataSource
