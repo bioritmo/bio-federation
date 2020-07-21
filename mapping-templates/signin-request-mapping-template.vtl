@@ -1,0 +1,14 @@
+{
+  "version": "2018-05-29",
+  "method": "POST",
+  "resourcePath": "/auth/sign_in",
+  "params":{
+      "body": {
+        "document_number": "$context.args.document_number",
+        "password": "$context.args.password"
+      },
+      "headers": {
+          "Content-Type": "application/json"
+      }
+  }
+}

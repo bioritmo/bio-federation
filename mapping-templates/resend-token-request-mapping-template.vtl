@@ -1,0 +1,15 @@
+{
+  "version": "2018-05-29",
+  "method": "POST",
+  "resourcePath": "/auth/resend_token",
+  "params":{
+      "body": {
+        "document_number": "$context.args.document_number",
+        "document_kind": "$context.args.document_kind",
+        "contact_provider": "$context.args.contact_provider"
+      },
+      "headers": {
+          "Content-Type": "application/json"
+      }
+  }
+}

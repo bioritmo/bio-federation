@@ -1,0 +1,14 @@
+{
+  "version": "2018-05-29",
+  "method": "PUT",
+  "resourcePath": "/auth/sms_confirmation",
+  "params": {
+      "body": {
+        "document_number": "$context.args.document_number",
+        "confirmation_token": "$context.args.confirmation_token"
+      },
+      "headers": {
+          "Content-Type": "application/json"
+      }
+  }
+}

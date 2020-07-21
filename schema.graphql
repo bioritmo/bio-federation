@@ -1,0 +1,60 @@
+type User {
+	id: Int!
+	name: String
+	document_number: String
+	document_kind: String
+	birthdate: String
+	image_data: String
+	email: String
+	provider: String
+	uid: String
+	allow_password_change: Boolean
+	gender: String
+	jwt_fitness_classes: String
+	jwt_workout: String
+	type: String
+}
+
+type Message {
+  message: String!
+}
+
+input PhoneInput {
+  kind: Int,
+	area_code: Int,
+	number: Int
+}
+
+input RegistrationInput {
+  name: String!
+	document_number: String!
+	document_kind: String!
+	birthdate: String!
+	email: String!
+	password: String!
+	password_confirmation: String!
+	phones_attributes: [PhoneInput]!
+	confirmation_provider: String
+}
+
+type Mutation {
+	signIn(document_number: String!, password: String!): User
+	resetPassword(document_number: String!): Message
+	registration(input: RegistrationInput): User
+	resendToken(document_number: String!, document_kind: String!, contact_provider: String): Message
+	smsConfirmation(document_number: String!, confirmation_token: String!): Message
+	recoverySmsPassword(document_number: String!): Message
+	sendRecoverySmsPassword(document_number: String!, reset_password_token: String!,
+													password: String!, password_confirmation: String!): Message
+}
+
+type Query {
+  helloWorld(consumer_key: String, consumer_secret: String): String!
+}
+
+
+
+schema {
+  query: Query,
+	mutation: Mutation
+}

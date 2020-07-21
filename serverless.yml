@@ -1,0 +1,76 @@
+service: bio-federation
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'us-east-1'}
+  environment:
+    ${file(./config/env.${self:provider.stage}.json)}
+
+package:
+  individually: true
+  excludeDevDependencies: true
+  exclude:
+    - node_modules/**/*
+
+plugins:
+  - serverless-appsync-simulator
+  - serverless-appsync-plugin
+  - serverless-offline
+
+custom:
+  appsync-simulator:
+    apiKey: da2-fakeApiId123456
+    dynamoDb:
+      endpoint: http://localhost:${env:DYNAMODB_PORT, "4566"}
+  appSync:
+    name: bio-federation-grapqhl
+    authenticationType: API_KEY
+    mappingTemplates:
+      - dataSource: awsHttpDataSource
+        type: Mutation
+        field: signIn
+        request: "signin-request-mapping-template.vtl"
+        response: "signin-response-mapping-template.vtl"
+      - dataSource: awsHttpDataSource
+        type: Mutation
+        field: resetPassword
+        request: "reset-password-request-mapping-template.vtl"
+        response: "reset-password-response-mapping-template.vtl"
+      - dataSource: awsHttpDataSource
+        type: Mutation
+        field: registration
+        request: "registration-request-mapping-template.vtl"
+        response: "registration-response-mapping-template.vtl"
+      - dataSource: awsHttpDataSource
+        type: Mutation
+        field: resendToken
+        request: "resend-token-request-mapping-template.vtl"
+        response: "resend-token-response-mapping-template.vtl"
+      - dataSource: awsHttpDataSource
+        type: Mutation
+        field: smsConfirmation
+        request: "sms-confirmation-request-mapping-template.vtl"
+        response: "sms-confirmation-response-mapping-template.vtl"
+      - dataSource: awsHttpDataSource
+        type: Mutation
+        field: recoverySmsPassword
+        request: "recovery-sms-password-request-mapping-template.vtl"
+        response: "recovery-sms-password-response-mapping-template.vtl"
+      - dataSource: awsHttpDataSource
+        type: Mutation
+        field: sendRecoverySmsPassword
+        request: "send-recovery-sms-password-request-mapping-template.vtl"
+        response: "send-recovery-sms-password-response-mapping-template.vtl"
+    schema: # defaults schema.graphql
+    serviceRole: "AppSyncServiceRole"
+    dataSources:
+      - type: HTTP
+        name: awsHttpDataSource
+        description: 'Connection to Biosystem Rest Api'
+        config:
+          endpoint: ${self:provider.environment.BIOSYSTEM_URL}
+
+resources:
+  - ${file(config/resources/appsync.yml)}

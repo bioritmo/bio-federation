@@ -1,0 +1,21 @@
+{
+  "version": "2018-05-29",
+  "method": "POST",
+  "resourcePath": "/auth",
+  "params":{
+      "body": {
+        "name": "$context.args.input.name",
+        "document_number": "$context.args.input.document_number",
+        "document_kind": "$context.args.input.document_kind",
+        "birthdate": "$context.args.input.birthdate",
+        "email": "$context.args.input.email",
+        "password": "$context.args.input.password",
+        "password_confirmation": "$context.args.input.password_confirmation",
+        "phones_attributes": $util.toJson($context.args.input.phones_attributes),
+        "confirmation_provider": "$context.args.input.confirmation_provider"
+      },
+      "headers": {
+          "Content-Type": "application/json"
+      }
+  }
+}
