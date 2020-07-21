@@ -4,3 +4,7 @@ jspm_packages
 
 # Serverless directories
 .serverless
+
+# Ignore files from Operating System
+*~
+.DS_Store
