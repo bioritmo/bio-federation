@@ -8,5 +8,5 @@
   })
   $util.toJson($result)
 #else
-  $util.error($util.parseJson($ctx.result.body).errors, "$ctx.result.statusCode")
+  $util.error($util.parseJson($ctx.result.body).error, "$ctx.result.statusCode")
 #end

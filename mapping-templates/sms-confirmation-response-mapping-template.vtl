@@ -9,5 +9,10 @@
   })
   $util.toJson($result)
 #else
-  $util.error($util.parseJson($ctx.result.body).errors, "$ctx.result.statusCode")
+    #set($errors = $utils.parseJson($ctx.result.body).errors)
+    #foreach($error in $errors)
+      #foreach( $key in $error.keySet() )
+        $util.error("$key: $error.get($key)[0]")
+      #end
+    #end
 #end

@@ -64,13 +64,9 @@ custom:
         request: "send-recovery-sms-password-request-mapping-template.vtl"
         response: "send-recovery-sms-password-response-mapping-template.vtl"
     schema: # defaults schema.graphql
-    serviceRole: "AppSyncServiceRole"
     dataSources:
       - type: HTTP
         name: awsHttpDataSource
         description: 'Connection to Biosystem Rest Api'
         config:
           endpoint: ${self:provider.environment.BIOSYSTEM_URL}
-
-resources:
-  - ${file(config/resources/appsync.yml)}
