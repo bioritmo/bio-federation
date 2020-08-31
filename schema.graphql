@@ -30,6 +30,7 @@ input RegistrationInput {
 	document_number: String!
 	document_kind: String!
 	birthdate: String!
+	gender: String!
 	email: String!
 	password: String!
 	password_confirmation: String!
