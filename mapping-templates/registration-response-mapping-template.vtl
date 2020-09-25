@@ -23,5 +23,11 @@
     })
     $util.toJson($result)
 #else
-    $util.error($util.parseJson($ctx.result.body).errors, "$ctx.result.statusCode")
+    #set($errors = $util.parseJson($ctx.result.body).errors.get("full_messages"))
+    #if(!$errors)
+      #set($errors = $util.parseJson($ctx.result.body).errors)
+    #end
+    #foreach($error in $errors)
+      $util.error($error)
+    #end
 #end

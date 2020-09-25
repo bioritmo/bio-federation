@@ -11,7 +11,10 @@
         "email": "$context.args.input.email",
         "password": "$context.args.input.password",
         "password_confirmation": "$context.args.input.password_confirmation",
-        "phones_attributes": $util.toJson($context.args.input.phones_attributes),
+        "gender": "$context.args.input.gender",
+        "phones_attributes": {
+          "0": $util.toJson($context.args.input.phones_attributes[0])
+        },
         "confirmation_provider": "$context.args.input.confirmation_provider"
       },
       "headers": {

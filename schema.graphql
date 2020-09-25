@@ -41,7 +41,7 @@ input RegistrationInput {
 type Mutation {
 	signIn(document_number: String!, password: String!): User
 	resetPassword(document_number: String!): Message
-	registration(input: RegistrationInput): User
+	registration(input: RegistrationInput!): User
 	resendToken(document_number: String!, document_kind: String!, contact_provider: String): Message
 	smsConfirmation(document_number: String!, confirmation_token: String!): Message
 	recoverySmsPassword(document_number: String!): Message
